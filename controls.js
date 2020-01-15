@@ -24,6 +24,38 @@ class Input {
     }
 }
 
+function calculateMeasurements() {
+
+    switch (true) {
+
+        case measurements.bagHeight.changed():
+
+            let num = measurements.bagHeight;
+            measurements.bagWidth = num;
+
+            break;
+
+        case measurements.bagWidth.changed():
+
+            break;
+
+        case measurements.fabricLength.changed():
+
+            break;
+
+        case measurements.fabricWidth.changed():
+
+            break;
+    }
+}
+
+function cacheAll() {
+
+    for (let m of Object.keys(measurements)) {
+        measurements[m].cache();
+    }
+}
+
 // function makeSlider(x, y) {
 
 // 	let slider = createSlider(0, 255, 100);
