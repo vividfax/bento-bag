@@ -12,6 +12,14 @@ class Input {
         this.cached = placeholder;
     }
 
+    get() {
+        return this.input.value();
+    }
+
+    set(num) {
+        this.input.value(num);
+    }
+
     cache() {
         this.cached = this.input.value()
     }
@@ -26,27 +34,43 @@ class Input {
 
 function calculateMeasurements() {
 
+    let m = measurements;
+    let num;
+
     switch (true) {
 
-        case measurements.bagHeight.changed():
+        case m.bagHeight.changed():
 
-            let num = measurements.bagHeight;
-            measurements.bagWidth = num;
-
-            break;
-
-        case measurements.bagWidth.changed():
+            num = m.bagHeight.get();
+            m.bagWidth.set(num);
 
             break;
 
-        case measurements.fabricLength.changed():
+        case m.bagWidth.changed():
+
+            num = m.bagWidth.get();
+            m.bagHeight.set(num);
 
             break;
 
-        case measurements.fabricWidth.changed():
+        case m.fabricLength.changed():
+
+            num = m.fabricLength.get();
+            m.fabricWidth.set((num - 2) * 3 + 2);
 
             break;
+
+        case m.fabricWidth.changed():
+
+            num = m.fabricWidth.get();
+            m.fabricLength.set((num - 2) / 3 + 2);
+
+            break;
+
+        default:
+            return;
     }
+    cacheAll();
 }
 
 function cacheAll() {
