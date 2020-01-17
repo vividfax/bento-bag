@@ -10,8 +10,8 @@ function setup() {
 	let canvas = createCanvas(800, 500);
 	canvas.parent('sketch-holder');
 	pixelDensity(2);
-	background(light);
 
+	drawBackground();
 
 	scribble.bowing = 0.1;
 	scribble.roughness = 1.3;
@@ -30,4 +30,16 @@ function setup() {
 function draw() {
 
 	calculateMeasurements();
+}
+
+function drawBackground() {
+
+	noStroke();
+	fill(light);
+	rect(10, 10, width - 20, height - 20);
+
+	stroke(light);
+	strokeWeight(8);
+	scribble.bowing = 0.3;
+	scribble.scribbleRect(width / 2, height / 2, width - 20, height - 20);
 }

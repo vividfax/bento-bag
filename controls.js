@@ -16,8 +16,29 @@ class Input {
         return this.input.value();
     }
 
-    set(num) {
-        this.input.value(num);
+    set(n) {
+        this.input.value(n);
+    }
+
+    round() {
+
+        let n = this.input.value();
+        n *= 4;
+        n = round(n);
+        n /= 4;
+
+        this.input.value(n);
+    }
+
+    empty() {
+        this.input.value('');
+    }
+
+    checkNull() {
+
+        if (this.input.value() == 'NaN' || this.input.value() == 0) {
+            this.input.value('');
+        }
     }
 
     cache() {
@@ -34,58 +55,108 @@ class Input {
 
 function calculateMeasurements() {
 
+    let seamAllowance = 1;
+    seamAllowance *= 2;
+
     let m = measurements;
-    let num;
+    let n, third;
 
     switch (true) {
 
         case m.bagHeight.changed():
 
-            num = m.bagHeight.get();
-            m.bagWidth.set(num);
+            n = m.bagHeight.get();
+            third = dehypotenuse(n);
+
+            m.bagWidth.set(n);
+            m.fabricLength.set(third + seamAllowance);
+            m.fabricWidth.set(third * 3 + seamAllowance);
+
+            m.bagWidth.round();
+            m.fabricLength.round();
+            m.fabricWidth.round();
 
             break;
 
         case m.bagWidth.changed():
 
-            num = m.bagWidth.get();
-            m.bagHeight.set(num);
+            n = m.bagWidth.get();
+            third = dehypotenuse(n);
+
+            m.bagHeight.set(n);
+            m.fabricLength.set(third + seamAllowance);
+            m.fabricWidth.set(third * 3 + seamAllowance);
+
+            m.bagHeight.round();
+            m.fabricLength.round();
+            m.fabricWidth.round();
 
             break;
 
         case m.fabricLength.changed():
 
-            num = m.fabricLength.get();
-            m.fabricWidth.set((num - 2) * 3 + 2);
+            n = m.fabricLength.get();
+            third = n - seamAllowance;
+
+            if (n <= 2) {
+
+                m.bagHeight.empty();
+                m.bagWidth.empty();
+                m.fabricWidth.empty();
+
+                break;
+            }
+            m.bagHeight.set(hypotenuse(third));
+            m.bagWidth.set(hypotenuse(third));
+            m.fabricWidth.set(third * 3 + seamAllowance);
+
+            m.bagHeight.round();
+            m.bagWidth.round();
+            m.fabricWidth.round();
 
             break;
 
         case m.fabricWidth.changed():
 
-            num = m.fabricWidth.get();
-            m.fabricLength.set((num - 2) / 3 + 2);
+            n = m.fabricWidth.get();
+            third = (n - seamAllowance) / 3;
+
+            if (n <= 2) {
+
+                m.bagHeight.empty();
+                m.bagWidth.empty();
+                m.fabricLength.empty();
+
+                break;
+            }
+            m.bagHeight.set(hypotenuse(third));
+            m.bagWidth.set(hypotenuse(third));
+            m.fabricLength.set(third + seamAllowance);
+
+            m.bagHeight.round();
+            m.bagWidth.round();
+            m.fabricLength.round();
 
             break;
 
         default:
             return;
     }
-    cacheAll();
+    all('checkNull');
+    all('cache');
 }
 
-function cacheAll() {
+function all(funct) {
 
     for (let m of Object.keys(measurements)) {
-        measurements[m].cache();
+        eval('measurements[m].' + funct + '()');
     }
 }
 
-// function makeSlider(x, y) {
+function hypotenuse(a) {
+    return sqrt(a * a * 2);
+}
 
-// 	let slider = createSlider(0, 255, 100);
-// 	slider.parent('sketch-holder');
-// 	slider.position(x, y);
-// 	slider.style('width', '80px');
-
-// 	return slider;
-// }
+function dehypotenuse(a) {
+    return sqrt((a * a) / 2);
+}
