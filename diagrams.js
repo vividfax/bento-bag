@@ -6,7 +6,7 @@ function drawDiagrams() {
     translate(80, 100);
     drawBag();
 
-    translate(220, 120);
+    translate(230, 130);
     drawFabric();
 }
 
@@ -15,10 +15,14 @@ function drawBag() {
     const width = 140;
 
     fill(mid);
+    noStroke();
     triangle(0, 0, 0, width, width, width);
-    scribbleTriangle(0, 0, 0, width, width, width);
+    stroke(dark);
+    scribble.scribbleLine(0, 0, 0, width);
+    scribble.scribbleLine(0, 0, width, width);
 
     fill(mid);
+    noStroke();
     triangle(width, 0, 0, width, width, width);
     scribbleTriangle(width, 0, 0, width, width, width);
 
@@ -33,6 +37,7 @@ function drawFabric() {
     const height = 100 + seamAllowance;
 
     fill(mid);
+    noStroke();
     rect(0, 0, width, height);
     scribbleRect(0, 0, width, height);
 
@@ -77,7 +82,7 @@ function scribbleTriangle(x1, y1, x2, y2, x3, y3) {
 
 function drawSpan(x1, y1, x2, y2) {
 
-    const padding = 18;
+    const padding = 20;
     const footWidth = 6;
 
     stroke(mid);

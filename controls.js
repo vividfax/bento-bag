@@ -5,8 +5,16 @@ class Input {
         let input = createInput(placeholder);
 
         input.parent('sketch-holder');
+        input.class('form-control');
         input.position(x, y);
-        input.style('width', '40px');
+
+        input.style('width', '90px');
+        input.style('text-align', 'center');
+        input.style('color', light);
+        input.style('background', white);
+        input.style('border', 'none');
+        input.style('font-size', '20px');
+        input.style('padding-bottom', '1px');
 
         this.input = input;
         this.cached = placeholder;

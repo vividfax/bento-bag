@@ -1,6 +1,7 @@
-const light = "#f9dbbd";
-const mid = "#ffa5ab";
-const dark = "#a53860";
+const light = "#696773";
+const mid = "#009fb7";
+const dark = "#fed766";
+const white = "#eff1f3";
 
 let scribble = new Scribble();
 let measurements = {};
@@ -18,11 +19,11 @@ function setup() {
 
 	measurements = {
 
-		bagHeight: new Input(250, 160, 11),
-		bagWidth: new Input(125, 270, 11),
+		bagHeight: new Input(255, 150, 17),
+		bagWidth: new Input(105, 275, 17),
 
-		fabricLength: new Input(640, 265, 8),
-		fabricWidth: new Input(430, 360, 22)
+		fabricLength: new Input(655, 265, 14),
+		fabricWidth: new Input(420, 375, 28)
 	};
 	drawDiagrams();
 }
