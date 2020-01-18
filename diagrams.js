@@ -3,7 +3,7 @@ function drawDiagrams() {
     noStroke();
     strokeWeight(1.4);
 
-    translate(80, 100);
+    translate(80, 95);
     drawBag();
 
     translate(230, 130);

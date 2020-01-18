@@ -168,3 +168,23 @@ function hypotenuse(a) {
 function dehypotenuse(a) {
     return sqrt((a * a) / 2);
 }
+
+function toggle() {
+
+    let toggle = select('#toggle');
+    toggle.position(600, 50);
+
+    let cm = select('#cm');
+    cm.style('background', white);
+    cm.style('border-color', white);
+    cm.style('color', light);
+
+    let inches = select('#inches');
+    inches.style('background', mid);
+    inches.style('border-color', mid);
+    inches.style('color', light);
+
+    let seam = select('#seam');
+    seam.position(50, 415);
+    seam.style('color', white);
+}
