@@ -19,28 +19,34 @@ function setup() {
 
 	measurements = {
 
-		bagHeight: new Input(255, 150, 17),
-		bagWidth: new Input(105, 275, 17),
+		bagHeight: new Input(255, 150, 22),
+		bagWidth: new Input(105, 275, 22),
 
-		fabricLength: new Input(655, 265, 14),
-		fabricWidth: new Input(420, 375, 28)
+		fabricLength: new Input(655, 265, 18.5),
+		fabricWidth: new Input(420, 375, 49.5)
 	};
 	drawDiagrams();
 }
 
 function draw() {
 
+	// if (frameCount % 8 == 0) { //wiggle
+
+	// 	drawBackground();
+	// 	drawDiagrams();
+	// }
 	calculateMeasurements();
 }
 
 function drawBackground() {
 
+	background(white);
 	noStroke();
 	fill(light);
 	rect(10, 10, width - 20, height - 20);
 
 	stroke(light);
 	strokeWeight(8);
-	scribble.bowing = 0.3;
+	scribble.bowing = 0.2;
 	scribble.scribbleRect(width / 2, height / 2, width - 20, height - 20);
 }

@@ -63,7 +63,7 @@ class Input {
 
 function calculateMeasurements() {
 
-    let seamAllowance = 1;
+    let seamAllowance = 1.5;
     seamAllowance *= 2;
 
     let m = measurements;
@@ -106,7 +106,7 @@ function calculateMeasurements() {
             n = m.fabricLength.get();
             third = n - seamAllowance;
 
-            if (n <= 2) {
+            if (n <= seamAllowance) {
 
                 m.bagHeight.empty();
                 m.bagWidth.empty();
@@ -129,7 +129,7 @@ function calculateMeasurements() {
             n = m.fabricWidth.get();
             third = (n - seamAllowance) / 3;
 
-            if (n <= 2) {
+            if (n <= seamAllowance) {
 
                 m.bagHeight.empty();
                 m.bagWidth.empty();
